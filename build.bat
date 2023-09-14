@@ -21,8 +21,7 @@ cmake -A x64 ^
 cmake --build . --config Release -j8
 
 copy %ROOT_DIR%\inputImage.jpg %BUILD_DIR%\Release\ 
-copy %ROOT_DIR%\inputImage2.jpg %BUILD_DIR%\Release\ 
 
 cd %BUILD_DIR%\Release
-"DemoSSIM-PSNR.exe" .\inputImage.jpg .\inputImage2.jpg 
+"DemoColorCorrection.exe" .\inputImage.jpg 
 cd ..\..

@@ -104,18 +104,18 @@ void BoxBlurGrayscale(unsigned char *input, unsigned char *output, int Width, in
 
 void Grayscale(unsigned char *Input, unsigned char *Output, int Width, int Height, int Channels) {
     if (Channels == 1) {
-        for (unsigned int Y = 0; Y < Height; Y++) {
+        for (int Y = 0; Y < Height; Y++) {
             unsigned char *pOutput = Output + (Y * Width);
             unsigned char *pInput = Input + (Y * Width);
-            for (unsigned int X = 0; X < Width; X++) {
+            for (int X = 0; X < Width; X++) {
                 pOutput[X] = pInput[X];
             }
         }
     } else {
-        for (unsigned int Y = 0; Y < Height; Y++) {
+        for (int Y = 0; Y < Height; Y++) {
             unsigned char *pOutput = Output + (Y * Width);
             unsigned char *pInput = Input + (Y * Width * Channels);
-            for (unsigned int X = 0; X < Width; X++) {
+            for (int X = 0; X < Width; X++) {
                 pOutput[X] = ClampToByte(((21842 * pInput[0] + 21842 * pInput[1] + 21842 * pInput[2]) >> 16));
                 pInput += Channels;
             }
@@ -124,6 +124,7 @@ void Grayscale(unsigned char *Input, unsigned char *Output, int Width, int Heigh
 }
 
 void LocalColorCorrection(unsigned char *Input, unsigned char *Output, int Width, int Height, int Channels) {
+    if (Width <= 0, Height <= 0, Channels <= 0) return;
     unsigned char *Mask = (unsigned char *)malloc(Width * Height * sizeof(unsigned char));
     if (Mask == NULL) return;
     unsigned char LocalLut[256 * 256];
@@ -154,6 +155,7 @@ void LocalColorCorrection(unsigned char *Input, unsigned char *Output, int Width
 }
 
 void LocalExponentialCorrection(unsigned char *Input, unsigned char *Output, int Width, int Height, int Channels) {
+    if (Width <= 0, Height <= 0, Channels <= 0) return;
     unsigned char *Luminance = (unsigned char *)malloc(Width * Height * 2 * sizeof(unsigned char));
     unsigned char *Mask = Luminance + (Width * Height);
     if (Luminance == NULL) return;

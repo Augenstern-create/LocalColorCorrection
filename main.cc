@@ -77,7 +77,6 @@ void getCurrentFilePath(const char *filePath, char *saveFile) {
 
 int main(int argc, char **argv) {
     printf("Local Color Correction demo\n ");
-    printf("blog:http://cpuimage.cnblogs.com/ \n ");
 
     if (argc < 2) {
         printf("usage: %s   image \n ", argv[0]);
@@ -107,7 +106,7 @@ int main(int argc, char **argv) {
             printf("load: %s fail!\n ", szfile);
         }
         startTime = now();
-        //  LocalColorCorrection(inputImage, outputImg, Width, Height, Channels);
+        // LocalColorCorrection(inputImage, outputImg, Width, Height, Channels);
         LocalExponentialCorrection(inputImage, outputImg, Width, Height, Channels);
         double nProcessTime = calcElapsed(startTime, now());
 
